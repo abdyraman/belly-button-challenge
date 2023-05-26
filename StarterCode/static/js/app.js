@@ -1,38 +1,51 @@
 // Use the D3 library to read in samples.json from the URL
-
 const sample = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
+// Use d3.json() to fetch the data from the URL
 d3.json(sample).then(function(data) {
-    console.log(data);
-  
-    // Extract keys from the data object
-    let info = Object.keys(data);
-    console.log(info);
+  console.log(data);
 
-    let samples = Object.keys(data.samples);
-    console.log(samples);
+  // Extract the required data arrays from the data object
+  let samples = data.samples;
+  let otuIds = samples.map(obj => obj.otu_ids);
+  let sampleValues = samples.map(obj => obj.sample_values);
+  let otuLabels = samples.map(obj => obj.otu_labels);
+
+  // Combine the extracted arrays into an array of objects
+  let bacterias = samples.map((obj, index) => ({
+    otu_ids: otuIds[index],
+    sample_values: sampleValues[index],
+    otu_labels: otuLabels[index]
+  }));
+
+  // Sort the bacterias array based on sample_values in descending order
+  bacterias.sort((a, b) => b.sample_values - a.sample_values);
 
   // Slice the first 10 objects for plotting
-  let bacterias = samples.sort((a, b) => data.samples[b] - data.samples[a]).reverse().slice(0, 10);
-  console.log(bacterias);
-});
+  bacterias = bacterias.slice(0, 10);
 
-//   //Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
-// let trace1 = {
-//     x: samples.map(object => object.sample_values),
-//     y: samples.map(object => object.otu_ids),
-//     text: samples.map(object => object.otu_labels),
+  console.log(bacterias);
+
+//   // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
+//   let trace = {
+//     x: bacterias.map(obj => obj.sample_values),
+//     y: bacterias.map(obj => `OTU ${obj.otu_ids}`),
+//     text: bacterias.map(obj => obj.otu_labels),
 //     type: "bar",
 //     orientation: "h"
 //   };
 
-//   let traceData = [trace1];
+//   let traceData = [trace];
 
-// let layout = {
-//     height: 600,
+//   let layout = {
+//     title: "Top 10 OTUs",
+//     xaxis: { title: "Sample Values" },
+//     yaxis: { title: "OTU IDs" },
+//     height: 500,
 //     width: 800
 //   };
-  
-//   // Render the plot to the div tag with id "plot"
-//   // Note that we use `traceData` here, not `data`
-//   Plotly.newPlot("plot", traceData, layout);
+
+//   // Render the plot to the div tag with id "bar"
+//   Plotly.newPlot("bar", traceData, layout);
+});
+
