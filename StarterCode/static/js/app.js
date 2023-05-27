@@ -21,18 +21,7 @@ d3.json(sample).then((data) => {
     .text((d) => d);
 });
 
-//   // Create the dropdown select element
-//   const dropdownSelect = dropdownContainer
-//     .append("select")
-//     .attr("id", "dropdown-select");
 
-//   // Create the dropdown options
-//   const options = dropdownSelect
-//     .selectAll("option")
-//     .data(ids)
-//     .enter()
-//     .append("option")
-//     .text(d => d);
 
 // // Event handler for dropdown selection
 // dropdownSelect.on("change", function() {
