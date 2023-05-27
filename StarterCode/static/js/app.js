@@ -19,43 +19,34 @@ d3.json(sample).then((data) => {
   optionSelection
     .attr('value', (d) => d)
     .text((d) => d);
-});
 
+  // Event listener for select change
+  selectElement.on('change', function() {
+    // Get the selected value
+    let selectedValue = d3.select(this).property('value');
+    console.log('Selected ID:', selectedValue);
 
-
-// // Event handler for dropdown selection
-// dropdownSelect.on("change", function() {
-//   const selectedOption = d3.select(this).property("value");
-//   console.log("Selected option:", selectedOption);
-  
 //   // Filter the data based on the selected ID
-//   const filteredData = data.samples.filter(sample => sample.id === selectedOption);
-  
-//   // Log the filtered data
-//   console.log("Filtered data:", filteredData);
-// });
-// });
 
-//  //Horizontal bar chart
-//     let samples = data.samples;
-//     let otuIds = samples.map(obj => obj.otu_ids);
-//     let sampleValues = samples.map(obj => obj.sample_values);
-//     let otuLabels = samples.map(obj => obj.otu_labels);
+    const filteredData = data.samples.filter(sample => sample.id === selectedValue);
+    console.log("Filtered data:", filteredData);
 
-//   // // Combine the extracted arrays into an array of objects
-//   let bacterias = samples.map((obj, index) => ({
-//     otu_ids: otuIds[index],
-//     sample_values: sampleValues[index],
-//     otu_labels: otuLabels[index]
-//   }));
+    // Assign variables to the selected values
+    let otuIds = filteredData[0].otu_ids;
+    let sampleValues = filteredData[0].sample_values;
+    let otuLabels = filteredData[0].otu_labels;
+    
+    // Log the assigned variables to the console
+    console.log("otuIds:", otuIds);
+    console.log("sampleValues:", sampleValues);
+    console.log("otuLabels:", otuLabels);
+      });
+    });
 
-//   // // Sort the bacterias array based on sample_values in descending order
-// bacterias.sort((a, b) => b.sample_values - a.sample_values);
+// Sort the bacterias array based on sample_values in descending order
+sampleValues.sort((a, b) => b.sampleValues - a.sampleValues).reverse().slice(0, 10);
+console.log(sampleValues);
 
-//   // // Slice the first 10 objects for plotting
-//  bacterias = bacterias.slice(0, 10);
-
-// console.log(bacterias);
 
 //    // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
 //    let trace = {
