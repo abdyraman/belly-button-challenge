@@ -40,37 +40,36 @@ d3.json(sample).then((data) => {
     console.log("otuIds:", otuIds);
     console.log("sampleValues:", sampleValues);
     console.log("otuLabels:", otuLabels);
-      });
+
+    // Sort the sample values in descending order
+    sampleValues.sort((a, b) => b - a);
+
+    // Slice the first 10 values
+    let topSampleValues = sampleValues.slice(0, 10).reverse();
+
+    console.log("Top Sample Values:", topSampleValues);
+
+   // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
+   let trace = {
+    x: topSampleValues,
+    y: otuIds.slice(0, 10).map(id => `OTU ${id}`),
+    text: otuLabels.slice(0, 10),
+    type: "bar",
+    orientation: "h"
+  };
+
+    let traceData = [trace];
+
+  let layout = {
+      title: "Top 10 OTUs",
+      xaxis: { title: "Sample Values" },
+      yaxis: { title: "OTU ID" }
+    };
+
+// //   // Render the plot to the div tag with id "bar"
+    Plotly.newPlot("bar", traceData, layout);
     });
-
-// Sort the bacterias array based on sample_values in descending order
-sampleValues.sort((a, b) => b.sampleValues - a.sampleValues).reverse().slice(0, 10);
-console.log(sampleValues);
-
-
-//    // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
-//    let trace = {
-//      x: bacterias.map(obj => obj.sample_values),
-//      y: bacterias.map(obj => `OTU ${obj.otu_ids}`),
-//      text: bacterias.map(obj => obj.otu_labels),
-//      type: "bar",
-//      orientation: "h"
-//    };
-
-//    let traceData = [trace];
-
-//   let layout = {
-//      title: "Top 10 OTUs",
-//      xaxis: { title: "Sample Values" },
-//      yaxis: { title: "OTU IDs" },
-//      height: 500,
-//      width: 800
-//    };
-
-// // //   // Render the plot to the div tag with id "bar"
-//  Plotly.newPlot("bar", traceData, layout);
-// });
-
+});
 //  //Create a bubble chart that displays each sample.
 
 //   // Create the trace for the bubble chart
