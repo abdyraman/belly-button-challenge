@@ -68,39 +68,57 @@ d3.json(sample).then((data) => {
 
 // //   // Render the plot to the div tag with id "bar"
     Plotly.newPlot("bar", traceData, layout);
-    });
+
+    // Create the trace for the bubble chart
+    let trace2 = {
+      x: otuIds,
+      y: sampleValues,
+      text: otuLabels,
+      mode: 'markers',
+      marker: {
+        size: sampleValues,
+        color: otuIds,
+        colorscale: 'Earth',
+      }
+    };
+
+    let traceData2 = [trace2];
+
+    let layout2 = {
+      title: 'Bubble Chart - Samples',
+      xaxis: { title: 'OTU IDs' },
+      yaxis: { title: 'Sample Values' },
+      showlegend: false,
+      height: 600,
+      width: 1000
+    };
+
+    // Render the plot to the div tag with id "bubble"
+    Plotly.newPlot('bubble', traceData2, layout2);
+  });
 });
-//  //Create a bubble chart that displays each sample.
-
-//   // Create the trace for the bubble chart
-//   let trace = {
-//     x: otuIds,
-//     y: sampleValues,
-//     text: otuLabels,
-//     mode: 'markers',
-//     marker: {
-//       size: sampleValues,
-//       color: otuIds,
-//       colorscale: 'Earth',
-//     }
-//   };
-
-//   let traceData = [trace];
-
-//   let layout = {
-//     title: 'Bubble Chart - Samples',
-//     xaxis: { title: 'OTU IDs' },
-//     yaxis: { title: 'Sample Values' },
-//     showlegend: false,
-//     height: 600,
-//     width: 1000
-//   };
-
-//   // Render the plot to the div tag with id "bubble"
-//   Plotly.newPlot('bubble', traceData, layout);
-// });
 
 // //Display the sample metadata, i.e., an individual's demographic information.
+//   // Filter the data based on the selected ID
+
+// const filteredMetadata = data.metadata.filter(metadata => metadata.id === parseInt(selectedValue));
+// console.log("Filtered metadata:", filteredMetadata);
+
+// // Select the element where you want to display the metadata (e.g., a <div> with id "metadata")
+// let metadataElement = d3.select('#metadata');
+
+// // Clear any existing metadata
+// metadataElement.html('');
+
+// // Iterate over the filtered metadata and display each demographic
+// filteredMetadata.forEach(metadata => {
+//   Object.entries(metadata).forEach(([key, value]) => {
+//     metadataElement
+//       .append('p')
+//       .text(`${key}: ${value}`);
+//   });
+// });
+
 
 // //Display each key-value pair from the metadata JSON object somewhere on the page.
 
