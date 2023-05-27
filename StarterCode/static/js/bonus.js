@@ -1,8 +1,4 @@
-// Adapt the Gauge Chart from https://plot.ly/javascript/gauge-charts/Links to an external site. to plot the weekly washing frequency of the individual.
-
-// You will need to modify the example gauge code to account for values ranging from 0 through 9.
-
-// Update the chart whenever a new sample is selected.
+function buildgauge(wfreq){
 
 var data = [
     {
@@ -13,7 +9,7 @@ var data = [
       },
       type: "indicator",
       mode: "gauge+number",
-      value: 5,  // You can set the initial value here
+      value: wfreq,
       gauge: {
         axis: { range: [0, 9], tickwidth: 1, tickcolor: "darkblue" },
         bar: { color: "darkblue" },
@@ -34,5 +30,5 @@ var data = [
   ];
   
   var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
-  Plotly.newPlot('myDiv', data, layout);
-  
+  Plotly.newPlot('gauge', data, layout);
+}

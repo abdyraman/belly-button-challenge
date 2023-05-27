@@ -95,31 +95,30 @@ d3.json(sample).then((data) => {
 
     // Render the plot to the div tag with id "bubble"
     Plotly.newPlot('bubble', traceData2, layout2);
-  });
+//Display the sample metadata, i.e., an individual's demographic information.
+  // Filter the data based on the selected ID
+
+    const filteredMetadata = data.metadata.filter(metadata => metadata.id === parseInt(selectedValue));
+    console.log("Filtered metadata:", filteredMetadata);
+
+    // Select the element where you want to display the metadata (e.g., a <div> with id "metadata")
+    let metadataElement = d3.select('#sample-metadata');
+
+    // Clear any existing metadata
+    metadataElement.html('');
+
+    // Iterate over the filtered metadata and display each demographic
+    filteredMetadata.forEach(metadata => {
+      Object.entries(metadata).forEach(([key, value]) => {
+        metadataElement
+          .append('p')
+          .text(`${key}: ${value}`);
+      });
+    });
+    var wfreq=filteredMetadata[0].wfreq
+    buildgauge(wfreq)
 });
-
-// //Display the sample metadata, i.e., an individual's demographic information.
-//   // Filter the data based on the selected ID
-
-// const filteredMetadata = data.metadata.filter(metadata => metadata.id === parseInt(selectedValue));
-// console.log("Filtered metadata:", filteredMetadata);
-
-// // Select the element where you want to display the metadata (e.g., a <div> with id "metadata")
-// let metadataElement = d3.select('#metadata');
-
-// // Clear any existing metadata
-// metadataElement.html('');
-
-// // Iterate over the filtered metadata and display each demographic
-// filteredMetadata.forEach(metadata => {
-//   Object.entries(metadata).forEach(([key, value]) => {
-//     metadataElement
-//       .append('p')
-//       .text(`${key}: ${value}`);
-//   });
-// });
-
-
+});
 // //Display each key-value pair from the metadata JSON object somewhere on the page.
 
 // //Update all the plots when a new sample is selected. 
