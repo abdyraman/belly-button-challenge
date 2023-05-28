@@ -26,7 +26,7 @@ d3.json(sample).then((data) => {
     let selectedValue = d3.select(this).property('value');
     console.log('Selected ID:', selectedValue);
 
-//   // Filter the data based on the selected ID
+//   Filter the data based on the selected ID
 
     const filteredData = data.samples.filter(sample => sample.id === selectedValue);
     console.log("Filtered data:", filteredData);
@@ -41,10 +41,10 @@ d3.json(sample).then((data) => {
     console.log("sampleValues:", sampleValues);
     console.log("otuLabels:", otuLabels);
 
-    // Sort the sample values in descending order
+    // Sort the sample values 
     sampleValues.sort((a, b) => b - a);
 
-    // Slice the first 10 values
+    // Slice the first 10 values in descending order
     let topSampleValues = sampleValues.slice(0, 10).reverse();
 
     console.log("Top Sample Values:", topSampleValues);
@@ -95,6 +95,7 @@ d3.json(sample).then((data) => {
 
     // Render the plot to the div tag with id "bubble"
     Plotly.newPlot('bubble', traceData2, layout2);
+
 //Display the sample metadata, i.e., an individual's demographic information.
   // Filter the data based on the selected ID
 
@@ -119,9 +120,6 @@ d3.json(sample).then((data) => {
     buildgauge(wfreq)
 });
 });
-// //Display each key-value pair from the metadata JSON object somewhere on the page.
+//Display each key-value pair from the metadata JSON object somewhere on the page.
 
-// //Update all the plots when a new sample is selected. 
-// //Additionally, you are welcome to create any layout that you would like for your dashboard. 
-// //Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo. 
-// //Ensure that your repository has regular commits and a thorough README.md file
+

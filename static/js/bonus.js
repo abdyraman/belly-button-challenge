@@ -1,33 +1,44 @@
 function buildgauge(wfreq){
 
-var data = [
+  var data = [
     {
       domain: { x: [0, 1], y: [0, 1] },
       title: {
-        text: "Belly Button Washing Frequency",
-        font: { size: 24 }
+        text: "Belly Button Washing Frequency<br><span style='font-size: 16px'>Scrubs per week</span>",
+        font: { size: 24 },
       },
       type: "indicator",
-      mode: "gauge+number",
+      mode: "gauge",
       value: wfreq,
       gauge: {
-        axis: { range: [0, 9], tickwidth: 1, tickcolor: "darkblue" },
-        bar: { color: "darkblue" },
+        axis: {
+          range: [0, 9],
+          tickwidth: 1,
+          tickcolor: "darkblue",
+          tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          ticktext: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9"]
+        },
         bgcolor: "white",
+        bar: {
+          color: "red",
+          shape: "arrow"
+        },
         steps: [
-          { range: [0, 1], color: "rgb(230, 242, 255)" },
-          { range: [1, 2], color: "rgb(204, 230, 255)" },
-          { range: [2, 3], color: "rgb(179, 217, 255)" },
-          { range: [3, 4], color: "rgb(153, 204, 255)" },
-          { range: [4, 5], color: "rgb(128, 191, 255)" },
-          { range: [5, 6], color: "rgb(102, 178, 255)" },
-          { range: [6, 7], color: "rgb(77, 166, 255)" },
-          { range: [7, 8], color: "rgb(51, 153, 255)" },
-          { range: [8, 9], color: "rgb(26, 140, 255)" }
+          { range: [0, 1], color: "#F5F5DC"},
+          { range: [1, 2], color: "#E8F5E9"},
+          { range: [2, 3], color: "#C8E6C9"},
+          { range: [3, 4], color: "#A5D6A7"},
+          { range: [4, 5], color: "#81C784" },
+          { range: [5, 6], color: "#66BB6A" },
+          { range: [6, 7], color: "#4CAF50"},
+          { range: [7, 8], color: "#43A047"},
+          { range: [8, 9], color: "#388E3C"}
         ]
       }
     }
   ];
+  
+  
   
   var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
   Plotly.newPlot('gauge', data, layout);
