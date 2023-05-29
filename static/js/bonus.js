@@ -1,16 +1,20 @@
+
 function buildgauge(wfreq){
 
-  var data = [
+var data = [
     {
       domain: { x: [0, 1], y: [0, 1] },
       title: {
-        text: "Belly Button Washing Frequency<br><span style='font-size: 16px'>Scrubs per week</span>",
-        font: { size: 24 },
+        text: "Belly Button Washing Frequency",
+        font: { size: 24 }
       },
       type: "indicator",
+      mode: "gauge+number",
       mode: "gauge",
       value: wfreq,
       gauge: {
+        axis: { range: [0, 9], tickwidth: 1, tickcolor: "darkblue" },
+        bar: { color: "darkblue" },
         axis: {
           range: [0, 9],
           tickwidth: 1,
@@ -37,9 +41,8 @@ function buildgauge(wfreq){
       }
     }
   ];
-  
-  
-  
   var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
-  Plotly.newPlot('gauge', data, layout);
-}
+
+    let GAUGE = document.getElementById("gauge");
+    Plotly.newPlot(GAUGE, data, layout);
+  }

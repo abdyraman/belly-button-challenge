@@ -120,6 +120,5 @@ d3.json(sample).then((data) => {
     buildgauge(wfreq)
 });
 });
-//Display each key-value pair from the metadata JSON object somewhere on the page.
 
 
