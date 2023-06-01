@@ -23,7 +23,7 @@ function buildgauge(wfreq) {
           range: [0, 9],
           tickwidth: 1,
           tickcolor: "darkblue",
-          tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8],
           ticktext: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9"]
         },
         bgcolor: "white",
@@ -69,8 +69,6 @@ function buildgauge(wfreq) {
   let GAUGE = document.getElementById("gauge");
   Plotly.newPlot(GAUGE, data, layout);
 }
-
-
 
 // function buildgauge(wfreq){
 
